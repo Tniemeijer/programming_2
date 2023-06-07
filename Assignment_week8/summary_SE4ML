@@ -1,0 +1,30 @@
+In the articles the limitations of the implementation of machine learning enabled applications are highlighted.
+The application of ML software needs a comprehension of multiple diciplines thus mismatches between  may arise. In the first article a couple of these mismatches are brought to light (https://insights.sei.cmu.edu/blog/software-engineering-for-machine-learning-characterizing-and-detecting-mismatch-in-machine-learning-systems/)
+These mismatches include: computing-resource mismatch, data-distribution mismatch, API mismatch, test-data mismatch and a monitoring mismatch. 
+
+definitions: 
+"
+computing-resource mismatch: poor system performance because the computing resources that are required to execute the model are not available in the production environment
+
+data-distribution mismatch: poor model accuracy because the training data doesn’t match the production data
+
+API mismatch: the need to generate a lot of glue code because the ML component is expecting different inputs and outputs than what is provided by the system in which it is integrated
+
+test-data mismatch: inability of software engineers to properly test a component because they don’t have access to test data or don’t fully understand the component or know how to test it
+
+monitoring mismatch: inability of the monitoring tools in the production environment to collect ML-relevant metrics, such as model accuracy
+" 
+Also in the article some observations from the field are given and recommendations are made. 
+
+The second article (https://insights.sei.cmu.edu/blog/tackling-collaboration-challenges-in-the-development-of-ml-enabled-systems/) focusses more on the social/ team aspects of the works. It also includes some real scenarios.
+At the end of the article the following summary is given: 
+
+"
+Communication: To combat problems arising from miscommunication, we advocate ML literacy for software engineers and managers, and likewise software engineering literacy for data scientists.
+
+Documentation: Practices for documenting model requirements, data expectations, and assured model qualities have yet to take root. Interface documentation already in use may provide a good starting point, but any approach must use a language understood by everyone involved in the development effort.
+
+Engineering: Project managers should ensure sufficient engineering capabilities for both ML and non-ML components and foster product and operations thinking.
+
+Process: The experimental, trial-and error process of ML model development does not naturally align with the traditional, more structured software process lifecycle. We advocate for further research on integrated process lifecycles for ML-enabled systems.
+"
