@@ -25,9 +25,9 @@ class Chloroplast:
                 self.water += 1
             case "CO2": 
                 self.co2 += 1
-        if mol_formula != 'H2O' and mol_formula != 'CO2':
-            res = ()
-            raise ValueError("I can't work with this..")
+            case _:
+                res = ()
+                raise ValueError("I can't work with this..")
         if self.water >= 6 and self.co2 >= 12:
             res = self.photosynthesis()
             self.water -= 6
