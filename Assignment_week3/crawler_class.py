@@ -26,7 +26,6 @@ class Crawler:
             raise StopIteration
         return self.crawl_site(suburl)
        
-
     @staticmethod
     def hack_ssl():
         """ ignores the certificate errors"""

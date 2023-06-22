@@ -26,14 +26,15 @@ class Reader:
         """method removes observers from the subscription"""
         try:
             self.observers.remove(observer)
-        except:
+        except IndexError:
             print("observer not found")
-            pass
 
     def notify_observers(self):
-        for observer in self.observers:
-            observer.update()
-            time.sleep(5)
+        data = 'start'
+        while data:
+            data = self.get_lines()
+            for observer in self.observers:
+                observer.update(data)
             
 
 

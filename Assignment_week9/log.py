@@ -13,7 +13,7 @@ class Logger:
         """
         
         """
-        with open(self.log_file, 'a') as log:
+        with open(self.log, 'a') as log:
             log.writelines(itm)
     
     def check_new_files(self, list_of_files):
