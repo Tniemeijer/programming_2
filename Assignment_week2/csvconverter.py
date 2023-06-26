@@ -1,7 +1,7 @@
 """
 Class that converts a csv to a .json format
 """
-
+import json
 import linecache as lc
 
 class CsvConverter:
@@ -21,16 +21,16 @@ class CsvConverter:
         the function splits and returns the lines
         in .json format
         """
-        json = []
+        json_file = []
         for line in lines:
             line = line.strip().split(",")
             try:
                 assert len(self.header) == len(line) 
-                json.append({h:line[c] for c,h in enumerate(self.header)})
-            except:
+                json_file.append({h:line[c] for c,h in enumerate(self.header)})
+            except Exception:
                 if len(line) == 0:
-                    json.append("")
-                    return json
+                    json_file.append("")
+                    return json.dumps(json)
                 else:
                     #print(f"line {c+1} has not the right amount of values")
                     pass

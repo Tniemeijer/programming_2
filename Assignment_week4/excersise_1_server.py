@@ -1,18 +1,23 @@
+#Standard modules
 import socketserver
-from http.server import SimpleHTTPRequestHandler as SimpleHander
+from http.server import SimpleHTTPRequestHandler as SimpleHandler
+import json
+#Local modules
 from e1_dataprovider import DataProvider
 
-class ServerHandler(SimpleHander):
+
+class ServerHandler(SimpleHandler):
 
     def do_GET(self) -> None:
         path = self.path.split('/')
         if path[1] == "data":
             try:
-                self.send_header('Content-Type', 'application/json')
-                dp = DataProvider(param=path[2:], path="/Users/timniemeijer/programming_2/Assignment_week4/dSST.csv")
                 self.send_response(200)
-                self.wfile.write(dp.data.encode('utf-8'))
+                self.send_header('Content-Type', 'application/json')
                 self.end_headers()
+                dp = DataProvider(param=path[2:], path="/Users/timniemeijer/programming_2/Assignment_week4/dSST.csv")
+                data_json = json.dumps(dp.data)  # Convert data to JSON string
+                self.wfile.write(data_json.encode('utf-8'))  # Write JSON string to client
             except ValueError:
                 self.send_error(400)
         else:
