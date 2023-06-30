@@ -1,27 +1,37 @@
-import os
+from datetime import datetime
 
 
 class Logger:
     def __init__(self, log_file):
         """
-        Initializes the logger, checks whether the log file exists.
-        If not, it creates the log file.
+        Initializes the logger.
+        In self.done files that have already been processed will be stored.
         """
         self.log = log_file
+        self._add_log_start()
+        self.done = []
 
     def add_to_log(self, itm):
         """
+        Method that writes to log with date and timestamp added.
         
-        """
-        with open(self.log, 'a') as log:
-            log.writelines(itm)
-    
-    def check_new_files(self, list_of_files):
-        with open(self.log,'r') as log:
-            ref = log.read().splitlines()
-        already_processed = list(set(ref).intersection(set(list_of_files)))
-        list_of_files.remove(already_processed)
-        return list_of_files
+        -------
 
+        input:
+                itm (str): text that will be added to the log
+        
+        output:
+                writes line to log (str):  ddmmYY-HH:MM:SS: itm
+             
+        """
+        date_time = datetime.strftime(datetime.now(),"%d/%m/%Y-%H:%M:%S")
+        with open(self.log, mode='a', encoding='utf-8') as log:
+            log.writelines(f'{date_time}: {itm}\n')
+
+    def _add_log_start(self):
+        """
+        When initializing the logger a start text is added to indicate a new run. 
+        """
+        self.add_to_log("Run started")
 
         
