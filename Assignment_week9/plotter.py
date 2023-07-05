@@ -2,12 +2,36 @@ import matplotlib.pyplot as plt
 
 
 class Plotter:
+    """
+    Plot creating class
+    """
+    def __init__(self, sensors):
+        """
+        Initializes the plotter
 
-    def sensor_plot(self, data, sensors):
-        num_plots = len(sensors)
+        --------------
+        params: 
+                sensors (list): list with sensors used for plotting
+        """
+        self.sensors = sensors
+        
+    def sensor_plot(self, data):
+        """
+        plotting function
+
+        --------------
+        params:
+                data (pandas.Dataframe): dataframe with the sensor data and
+                                        predictions.
+        
+        output: 
+                plot (mpl.pyplot.subplots): closed plot with sensor and
+                                             prediction data.
+        """
+        num_plots = len(self.sensors)
         fig, axes = plt.subplots(num_plots,figsize=(25,5*num_plots))
         plt.tight_layout()
-        for ax, sensor in zip(axes.flat,sensors):
+        for ax, sensor in zip(axes.flat,self.sensors):
             sensor_name = f'sensor_{sensor}'
             broken = data[data["machine_status"] == 'BROKEN']
             recovery = data[data["machine_status"] == 'RECOVERING']

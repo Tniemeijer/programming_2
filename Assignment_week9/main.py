@@ -8,38 +8,52 @@ Author: T.Niemeijer
 Date: 2023/07/05
 """
 
+#standard libraries
+import json
+import os
+import traceback
+from time import sleep
+
 #imported libraries
 import joblib
 import pandas as pd
-import os
-from time import sleep
 
 #local modules
 from datamanager import DataManager
 from plotter import Plotter
 from log import Logger
 
-class Main:
+class AnomalyDetector:
     """
     Main class for running the automated anomaly detector
 
-    --------------
-    params:
-            clf_path (str): path to the classifier, in .joblib format.
-            data_path (str): path to where new data is coming in.
-            output path (str): path where plots are stored.
+    
 
     """
-    def __init__(self, clf_path, data_path, output_path, interval=30):
+    def __init__(self, classifier_path, data_path, output_img, 
+                sensors, output_log_path, interval=30):
+        """
+        Initializes the AnomalyDetector
+
+        --------------
+        params:
+            classifier_path (str): Path to the pretrained classifier model.
+            data_path (str): Path to the directory where new data is stored.
+            output_img_path (str): Path to the directory where plots are saved.
+            sensors (list): List of sensor numbers used for plotting.
+            output_log_path (str): Path to the log file.
+            interval (int): Time interval in seconds between 
+                            consecutive checks for new data.
+        """
         #initializing Main.
-        self.classifier = joblib.load(clf_path)
-        self.output_folder = output_path
+        self.classifier = joblib.load(classifier_path)
+        self.output_img= output_img
         self.data_path = data_path
         self.queue = []
             #initializing the subclasses.
-        self.log = Logger()
+        self.log = Logger(log_path=output_log_path)
         self.datamanager = DataManager()
-        self.plotter = Plotter()
+        self.plotter = Plotter(sensors=sensors)
         self.interval = interval
         
     def _check_data_available(self):
@@ -67,8 +81,14 @@ class Main:
             new_file = self.queue.pop()
             self.data = pd.read_csv(f'{self.data_path}/{new_file}')
             self.data_name = new_file
-        except IndexError:
+        except Exception:
+            self.data = None
+            error = traceback.format_exc() 
+            self.log.add_to_log(itm=f'The following error occurred while\
+                                     getting new data from the queue:\
+                                    \n{str(error)}', mode='err')
             self.queue = []
+
 
     def _check_new_files(self, list_of_files):
         """
@@ -78,7 +98,10 @@ class Main:
         """
         already_processed = list(set(self.log.done).intersection(set(list_of_files)))
         list_of_files = [file for file in list_of_files if file not in already_processed]
-        self.log.add_to_log(f'New files found: {list_of_files}')
+        if list_of_files:
+            self.log.add_to_log(f'New files found: {list_of_files}')
+        else:
+            self.log.add_to_log('No new files found')
         return list_of_files
 
     def _preprocess(self):
@@ -90,8 +113,16 @@ class Main:
         Output:
             overwrites self.data with preprocessed data
         """
-        self.X = self.datamanager.preprocess(self.data)
-        self.log.add_to_log(f'Preprocessing of {self.data_name} is finished')
+        try: 
+            self.X = self.datamanager.preprocess(self.data)
+            self.log.add_to_log(f'Preprocessing of {self.data_name} is finished')
+        except Exception:
+            error = traceback.format_exc()
+            self.X = None
+            self.data = None
+            self.log.add_to_log(itm=f'During preprocessing an error occurred:\
+                \n{str(error)}', mode='err')
+
     
     def _classify(self):
         """
@@ -102,10 +133,15 @@ class Main:
         Output:
             adds column ["pred"] with the predicted values to self.data
         """
-        self.data["pred"] = self.classifier.predict(self.X)
-        self.log.add_to_log(f'Finished outlier detection of {self.data_name}')
-    
-    def _plot(self, sensors=[10,20,30]):
+        try: 
+            self.data["pred"] = self.classifier.predict(self.X)
+            self.log.add_to_log(f'Finished outlier detection of {self.data_name}')
+        except Exception:
+            error = traceback.format_exc()
+            self.log.add_to_log(itm=f'During preprocessing an error occurred:\
+                \n{str(error)}', mode='err')
+
+    def _plot(self):
         """
         Plots the anomaly whenever new data is available.
 
@@ -114,12 +150,17 @@ class Main:
                sensor (int): sensor number that is used for the plot.
         """
         # getting rid of the extension (.csv) [:-4]
-        plot_path = f'{self.output_folder}/{self.data_name[:-4]}_plot'
-        plot = self.plotter.sensor_plot(data=self.data, sensors=sensors)
-        plot.savefig(plot_path)
-        self.log.add_to_log(f'Plot saved as {plot_path}.png')
+        try:
+            plot_path = f'{self.output_img}/{self.data_name[:-4]}_plot'
+            plot = self.plotter.sensor_plot(data=self.data)
+            plot.savefig(plot_path)
+            self.log.add_to_log(f'Plot saved as {plot_path}.png')
+        except Exception:
+            error = traceback.format_exc()  # Get the formatted traceback as a string
+            self.log.add_to_log(itm=f'During plotting an error occurred:\
+                \n{error}', mode='err')
 
-    def main(self):
+    def run(self):
         """
         main function, infinite loop.
         Checks if there is data in the queue and runs the process. 
@@ -128,6 +169,7 @@ class Main:
         After that it will look for new data.
         """
         while True:
+            self.log.add_to_log('Looking for new files')
             self._check_data_available()
             while len(self.queue) > 0:
                 self._get_new_data()
@@ -135,16 +177,21 @@ class Main:
                 self._classify()
                 self._plot()
                 self.log.done.append(self.data_name)
+            self.log.add_to_log(f'Idle for {self.interval} seconds')
             sleep(self.interval)
             
 
-
 if __name__ == '__main__':
-    clf_path = "/Users/timniemeijer/programming_2/Assignment_week9/loof_classifier.joblib"
-    data_path = "/Users/timniemeijer/programming_2/Assignment_week9/DATA"
-    output_path = "/Users/timniemeijer/programming_2/Assignment_week9/plots"
-    main = Main(clf_path=clf_path, data_path=data_path, output_path=output_path)
-    main.main()
-            
-            
-        
+    #clf_path = "/Users/timniemeijer/programming_2/Assignment_week9/loof_classifier.joblib"
+    #data_path = "/Users/timniemeijer/programming_2/Assignment_week9/DATA"
+    #output_path = "/Users/timniemeijer/programming_2/Assignment_week9/plots"
+    with open("Assignment_week9/application.json",'r', encoding='utf8') as js_file:
+        config = json.load(js_file)
+
+    detector = AnomalyDetector(classifier_path=config["classifier"],
+                data_path=config["input_dir"],
+                output_img=config["output_img"],
+                output_log_path=config["output_log"],
+                sensors=config["sensors"],
+                interval=config["interval"])
+    detector.run()

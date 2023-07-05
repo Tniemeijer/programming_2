@@ -1,0 +1,46 @@
+06/07/2023-00:04:18: Run started
+06/07/2023-00:04:18: Looking for new files
+06/07/2023-00:04:18: New files found: ['90000_100000_sensor.csv', '10000_20000_sensor.csv', 'KRAK.csv', '70000_80000_sensor.csv', '80000_90000_sensor.csv']
+06/07/2023-00:04:18: Preprocessing of 80000_90000_sensor.csv is finished
+06/07/2023-00:04:19: Finished outlier detection of 80000_90000_sensor.csv
+06/07/2023-00:04:20: Plot saved as /Users/timniemeijer/programming_2/Assignment_week9/plots/80000_90000_sensor_plot.png
+06/07/2023-00:04:20: Preprocessing of 70000_80000_sensor.csv is finished
+06/07/2023-00:04:21: Finished outlier detection of 70000_80000_sensor.csv
+06/07/2023-00:04:21: Plot saved as /Users/timniemeijer/programming_2/Assignment_week9/plots/70000_80000_sensor_plot.png
+06/07/2023-00:04:21: Preprocessing of 10000_20000_sensor.csv is finished
+06/07/2023-00:04:22: Finished outlier detection of 10000_20000_sensor.csv
+06/07/2023-00:04:23: Plot saved as /Users/timniemeijer/programming_2/Assignment_week9/plots/10000_20000_sensor_plot.png
+06/07/2023-00:04:23: Preprocessing of 90000_100000_sensor.csv is finished
+06/07/2023-00:04:24: Finished outlier detection of 90000_100000_sensor.csv
+06/07/2023-00:04:24: Plot saved as /Users/timniemeijer/programming_2/Assignment_week9/plots/90000_100000_sensor_plot.png
+06/07/2023-00:04:24: Idle for 30 seconds
+06/07/2023-00:04:54: Looking for new files
+06/07/2023-00:04:54: No new files found
+06/07/2023-00:04:54: Idle for 30 seconds
+06/07/2023-00:05:24: Looking for new files
+06/07/2023-00:05:24: New files found: ['40000_50000_sensor.csv', '50000_60000_sensor.csv', '30000_40000_sensor.csv']
+06/07/2023-00:05:24: Preprocessing of 30000_40000_sensor.csv is finished
+06/07/2023-00:05:25: Finished outlier detection of 30000_40000_sensor.csv
+06/07/2023-00:05:25: Plot saved as /Users/timniemeijer/programming_2/Assignment_week9/plots/30000_40000_sensor_plot.png
+06/07/2023-00:05:25: Preprocessing of 50000_60000_sensor.csv is finished
+06/07/2023-00:05:26: Finished outlier detection of 50000_60000_sensor.csv
+06/07/2023-00:05:27: Plot saved as /Users/timniemeijer/programming_2/Assignment_week9/plots/50000_60000_sensor_plot.png
+06/07/2023-00:05:27: Preprocessing of 40000_50000_sensor.csv is finished
+06/07/2023-00:05:28: Finished outlier detection of 40000_50000_sensor.csv
+06/07/2023-00:05:28: Plot saved as /Users/timniemeijer/programming_2/Assignment_week9/plots/40000_50000_sensor_plot.png
+06/07/2023-00:05:28: Idle for 30 seconds
+06/07/2023-00:05:58: Looking for new files
+06/07/2023-00:05:58: No new files found
+06/07/2023-00:05:58: Idle for 30 seconds
+06/07/2023-00:06:28: Looking for new files
+06/07/2023-00:06:28: New files found: ['60000_70000_sensor.csv', '20000_30000_sensor.csv']
+06/07/2023-00:06:28: Preprocessing of 20000_30000_sensor.csv is finished
+06/07/2023-00:06:29: Finished outlier detection of 20000_30000_sensor.csv
+06/07/2023-00:06:30: Plot saved as /Users/timniemeijer/programming_2/Assignment_week9/plots/20000_30000_sensor_plot.png
+06/07/2023-00:06:30: Preprocessing of 60000_70000_sensor.csv is finished
+06/07/2023-00:06:31: Finished outlier detection of 60000_70000_sensor.csv
+06/07/2023-00:06:31: Plot saved as /Users/timniemeijer/programming_2/Assignment_week9/plots/60000_70000_sensor_plot.png
+06/07/2023-00:06:31: Idle for 30 seconds
+06/07/2023-00:07:01: Looking for new files
+06/07/2023-00:07:01: No new files found
+06/07/2023-00:07:01: Idle for 30 seconds

@@ -1,0 +1,8 @@
+{
+    "input_dir":"/Users/timniemeijer/programming_2/Assignment_week9/DATA",
+    "classifier":"/Users/timniemeijer/programming_2/Assignment_week9/loof_classifier.joblib",
+    "output_img":"/Users/timniemeijer/programming_2/Assignment_week9/plots",
+    "output_log":"/Users/timniemeijer/programming_2/Assignment_week9/log",
+    "sensors":[10,20,30],
+    "interval":30
+}

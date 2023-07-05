@@ -2,13 +2,13 @@ from datetime import datetime
 
 
 class Logger:
-    def __init__(self, log_file='log.log', err_log='log.err'):
+    def __init__(self, log_path, log_file='log.log', err_log='log.err'):
         """
         Initializes the logger.
         In self.done files that have already been processed will be stored.
         """
-        self.log = log_file
-        self.err = err_log
+        self.log = f'{log_path}/{log_file}'
+        self.err = f'{log_path}/{err_log}'
         self._add_log_start()
         self.done = []
 

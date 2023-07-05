@@ -1,0 +1,35 @@
+06/07/2023-00:04:21: During preprocessing an error occurred:                
+Traceback (most recent call last):
+  File "/Users/timniemeijer/programming_2/Assignment_week9/main.py", line 117, in _preprocess
+    self.X = self.datamanager.preprocess(self.data)
+  File "/Users/timniemeijer/programming_2/Assignment_week9/datamanager.py", line 32, in preprocess
+    data = scaler.fit_transform(data)
+  File "/opt/miniconda3/envs/testenvironment/lib/python3.10/site-packages/sklearn/utils/_set_output.py", line 140, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+  File "/opt/miniconda3/envs/testenvironment/lib/python3.10/site-packages/sklearn/base.py", line 878, in fit_transform
+    return self.fit(X, **fit_params).transform(X)
+  File "/opt/miniconda3/envs/testenvironment/lib/python3.10/site-packages/sklearn/preprocessing/_data.py", line 824, in fit
+    return self.partial_fit(X, y, sample_weight)
+  File "/opt/miniconda3/envs/testenvironment/lib/python3.10/site-packages/sklearn/preprocessing/_data.py", line 861, in partial_fit
+    X = self._validate_data(
+  File "/opt/miniconda3/envs/testenvironment/lib/python3.10/site-packages/sklearn/base.py", line 565, in _validate_data
+    X = check_array(X, input_name="X", **check_params)
+  File "/opt/miniconda3/envs/testenvironment/lib/python3.10/site-packages/sklearn/utils/validation.py", line 778, in check_array
+    dtype_orig = np.result_type(*dtypes_orig)
+  File "<__array_function__ internals>", line 180, in result_type
+ValueError: at least one array or dtype is required
+
+06/07/2023-00:04:21: During preprocessing an error occurred:                
+Traceback (most recent call last):
+  File "/Users/timniemeijer/programming_2/Assignment_week9/main.py", line 137, in _classify
+    self.data["pred"] = self.classifier.predict(self.X)
+TypeError: 'NoneType' object does not support item assignment
+
+06/07/2023-00:04:21: During plotting an error occurred:                
+Traceback (most recent call last):
+  File "/Users/timniemeijer/programming_2/Assignment_week9/main.py", line 155, in _plot
+    plot = self.plotter.sensor_plot(data=self.data)
+  File "/Users/timniemeijer/programming_2/Assignment_week9/plotter.py", line 36, in sensor_plot
+    broken = data[data["machine_status"] == 'BROKEN']
+TypeError: 'NoneType' object is not subscriptable
+
