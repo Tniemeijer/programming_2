@@ -1,3 +1,4 @@
+# Good work!
 """
 Main starts the server for the network client to get the data from
 """

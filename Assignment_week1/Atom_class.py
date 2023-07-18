@@ -42,6 +42,7 @@ class Atom:
 
     def check_mol_number(self, other):
         if self.mol_number != other.mol_number:
+            # Better to raise a specific error.
             raise Exception
 
 

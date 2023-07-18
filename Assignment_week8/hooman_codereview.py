@@ -13,6 +13,8 @@
 # creates and controls the widget and distributes to the consumers?
 # In the end this creates a bloated __init__.
 
+# I had the same observations 😎🤔
+
 # The lack of comments and descriptions makes it hard to understand what is going on
 
 # The use that the pause status will be checked could prove problematic if it breaks

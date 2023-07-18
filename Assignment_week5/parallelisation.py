@@ -10,6 +10,8 @@ with open('config.yaml', 'r') as conf_file:
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
+# Good to have your email and api key in a config file and not in your repo
+
 Entrez.email = config["e_mail"]
 
 file = Entrez.elink(dbfrom="pubmed",

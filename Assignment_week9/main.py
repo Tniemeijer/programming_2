@@ -1,3 +1,6 @@
+# Good work. Nice in different classes and layers.
+# A few small imnprovements are possible, but nothing terrible.
+
 """
 Anomaly detector- Assignment week 9
 

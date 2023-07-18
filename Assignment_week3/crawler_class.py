@@ -24,8 +24,10 @@ class Crawler:
             self.current_index += 1
         else:
             raise StopIteration
+        # Should this not be a `yield` instead of a `return`?
         return self.crawl_site(suburl)
-       
+    
+    # Good observeration that this method could be made static
     @staticmethod
     def hack_ssl():
         """ ignores the certificate errors"""
