@@ -13,7 +13,7 @@ def main():
     cons2 = AverageMonth()
     prod.add_observer(cons1)
     prod.add_observer(cons2)
-    prod.notify_observers()
+    prod.notify_observers() # the notify_observers should be called from within the observable.
 
 
 if __name__ == "__main__":

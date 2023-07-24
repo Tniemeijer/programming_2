@@ -33,6 +33,7 @@ class CsvConverter:
                     return json.dumps(json)
                 else:
                     #print(f"line {c+1} has not the right amount of values")
+                    # Better to raise an Exception here, right?
                     pass
         return json
 

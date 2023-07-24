@@ -14,6 +14,7 @@ class Reader:
         self.observers = []
         
     def get_lines(self, nr=5):
+        # nice, simple and readable realisation.
         lines = [lc.getline(self.csv_path, self.position + c) for c in range(nr)]
         self.position += nr
         return self.converter.csv_to_json(lines)
@@ -30,6 +31,12 @@ class Reader:
             print("observer not found")
 
     def notify_observers(self):
+        # The control flow is incorrect
+        # this method just should update the observers, but in your 
+        # realisation, it is also responsible for getting the 
+        # data and (by extension) propagating the internal pointers
+        # get_lines should be called from some client (user of this class)
+        # and that method should change thes state and call the notify-method.
         data = 'start'
         while data:
             data = self.get_lines()

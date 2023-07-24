@@ -8,7 +8,7 @@ class DataProvider:
     """
     Class that provides data
     """
-    def __init__(self,param, path, jsonmaker=JsonMaker):
+    def __init__(self, param, path, jsonmaker=JsonMaker): # be consequent in your use of spaces
         self.mode = self.get_mode(param)
         self.jsonmaker = jsonmaker(path, self.mode)
         self.data = self.jsonmaker.read_convert()

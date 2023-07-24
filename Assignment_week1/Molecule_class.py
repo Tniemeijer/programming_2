@@ -11,7 +11,11 @@ class Molecule():
         self.composition = atom_tup_ls
 
     def __repr__(self):
+       # would be better to safe this formula once it has been asked for
+       # (lazy loading)
        return self.create_formula()
+    
+    # would be better to also implement __str__, just to be sure
     
     def __add__(self, other):
        return Molecule(self.composition + other.composition)

@@ -14,12 +14,14 @@ class Chloroplast:
         self.co2 = 0
 
     def __str__(self):
+        # could be made into a one-liner
         info = f'Water: {self.water}\nCO2: {self.co2}'
         return info
 
     def add_molecule(self, molecule):
         res = ()
-        mol_formula = molecule.create_formula()
+        mol_formula = molecule.create_formula() #<-- could just call molecule.__str__()
+        # also better to uppercase the result, just to be sure
         match mol_formula:
             case "H2O":
                 self.water += 1
@@ -32,6 +34,8 @@ class Chloroplast:
             res = self.photosynthesis()
             self.water -= 6
             self.co2 -= 12
+        # This is incorrect
+        # you should return a list of tuples, not a tuple
         return res
     
     def photosynthesis(self):

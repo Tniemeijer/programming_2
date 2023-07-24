@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 class DataPlot:
+    # Good to make this abstract and have one method for both vertical and horizontal data plots
 
     def plot(data, period='month'):
         match period:
